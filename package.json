@@ -1,0 +1,19 @@
+{
+  "name": "nodeproject-genshinimpact",
+  "version": "1.0.0",
+  "description": "Premier projet Node JS réaliser à l'issue d'une semaine de formation",
+  "main": "./server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TristanSch1/NodeProject-GenshinImpact.git"
+  },
+  "author": "Tristan SCHWARTZ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TristanSch1/NodeProject-GenshinImpact/issues"
+  },
+  "homepage": "https://github.com/TristanSch1/NodeProject-GenshinImpact#readme"
+}
