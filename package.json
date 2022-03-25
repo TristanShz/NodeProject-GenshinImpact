@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/TristanSch1/NodeProject-GenshinImpact#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.8"
   }
 }
