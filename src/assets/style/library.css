@@ -1,0 +1,47 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("../images/background02.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: "Andada Pro", serif;
+}
+
+#libraryContent {
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#libraryContent h1 {
+  font-size: 4em;
+  color: #0e1333;
+}
+
+#libraryContent button {
+  background: rgba(14, 19, 51, 0.7);
+  border: none;
+  border-radius: 50px;
+  width: 400px;
+  height: 65px;
+  font-size: 32px;
+  color: white;
+}
+
+#libraryContent button:hover {
+  cursor: pointer;
+  background: rgba(14, 19, 51, 0.9);
+}
+
+#libraryContent button:active {
+  background: rgba(255, 255, 255, 0.9);
+  color: #0e1333;
+  border: 3px solid #0e1333;
+}

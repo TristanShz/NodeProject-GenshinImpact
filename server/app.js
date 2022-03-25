@@ -13,4 +13,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, distDir, "index.html"));
 });
+
+app.get("/library", (req, res) => {
+  res.sendFile(path.join(__dirname, distDir, "/pages/library.html"));
+});
+
 module.exports = app;
