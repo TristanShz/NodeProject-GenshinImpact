@@ -12,5 +12,41 @@
       <h1 id="libraryTitle">Screenshots Library</h1>
       <button>Add a screenshot</button>
     </div>
+
+    <div id="addScreenshotPopup">
+      <div id="preview">
+        <div id="imgPreview">
+          <img src="../assets/images/background01.png" alt="" />
+        </div>
+        <div id="imageDescriptionPreview">
+          <div id="descriptionPreview">
+            <h2>Description :</h2>
+            <p id="content"></p>
+          </div>
+          <div id="authorPreview">
+            <h2>Author :</h2>
+            <h2 id="content"></h2>
+          </div>
+        </div>
+      </div>
+      <div id="addScreenshotForm">
+        <i id="closePopup"
+          ><span class="iconify" data-icon="ep:close-bold"></span
+        ></i>
+        <h2>Add your screenshot</h2>
+        <p></p>
+        <form action="">
+          <label for="author">Name or Pseudo :</label>
+          <input type="text" name="author" id="author" />
+          <label for="description">Description :</label>
+          <textarea name="description" id="description" rows="3"></textarea>
+          <label for="imageUrl">Image URL : </label>
+          <input type="url" id="imageUrl" />
+          <button type="submit">Add this screenshot</button>
+        </form>
+      </div>
+    </div>
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script src="../assets/script/library.js"></script>
   </body>
 </html>
