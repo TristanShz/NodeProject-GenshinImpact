@@ -21,6 +21,7 @@ closePopup.addEventListener("click", () => {
   addScreenshotPopup.style.display = "none";
 });
 
+//Content Preview
 author.addEventListener("input", (content) => {
   authorPreview.innerText = content.target.value;
 });

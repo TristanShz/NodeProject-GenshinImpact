@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <link rel="stylesheet" href="../assets/style/library.css" />
+    <link rel="stylesheet" href="../assets/style/addScreenshotForm.css" />
   </head>
   <body>
     <div id="libraryContent">
@@ -35,7 +36,7 @@
         ></i>
         <h2>Add your screenshot</h2>
         <p></p>
-        <form action="">
+        <form action="/api/library" method="post">
           <label for="author">Name or Pseudo :</label>
           <input type="text" name="author" id="author" />
           <label for="description">Description :</label>
