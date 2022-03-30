@@ -9,20 +9,26 @@ body {
   background-attachment: fixed;
   background-size: cover;
   font-family: "Andada Pro", serif;
+  display: flex;
+  justify-content: center;
 }
 
 #libraryContent {
-  height: 100%;
+  height: fit-content;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #libraryContent h1 {
   font-size: 4em;
   color: #0e1333;
+  margin-bottom: 1%;
 }
 
 #libraryContent button {

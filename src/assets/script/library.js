@@ -14,6 +14,7 @@ const imgPreview = document.querySelector("#imgPreview img");
 const imgContainer = document.querySelector("#imgContainer");
 /*-------------------------------------------------------*/
 import { Screenshot } from "./Screenshot.js";
+import { modalDisplay } from "./modal.js";
 /*------------------FORM POPUP CONTENT-------------------*/
 //Open form popup
 addScreenshotButton.addEventListener("click", () => {
@@ -71,7 +72,7 @@ await fetch("/api/screenshots", myInit)
       imgContainer.appendChild(element.image);
       //Evènement pour écouter le click sur chaque image
       element.image.addEventListener("click", () => {
-        console.log(element.author);
+        modalDisplay(element.author, element.description, element.url);
       });
     });
   });
