@@ -21,7 +21,7 @@ const distDir = "../src/";
 app.use("/pages", express.static(path.join(__dirname, distDir, "/pages")));
 app.use("/assets", express.static(path.join(__dirname, distDir, "/assets")));
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 //Routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, distDir, "index.html"));
@@ -31,33 +31,22 @@ app.get("/library", (req, res) => {
   res.sendFile(path.join(__dirname, distDir, "/pages/library.html"));
 });
 
-app.post("/api/library", (req, res, next) => {
+//Route Post qui crée un nouvel objet à partir du model Screenshots et qui l'enregistre dans la BDD
+app.post("/api/screenshots", (req, res, next) => {
+  console.log(Screenshots);
   console.log(req.body);
-  res.status(201).json({
-    message: "Objet créé !",
+  const screenshot = new Screenshots({
+    ...req.body,
   });
+  screenshot
+    .save()
+    .then(() => res.status(201).json({ message: "Objet enregistré" }))
+    .catch((error) => res.status(400).json({ error }));
 });
-app.get("/api/library", (req, res, next) => {
-  const stuff = [
-    {
-      _id: "oeihfzeoi",
-      title: "Mon premier objet",
-      description: "Les infos de mon premier objet",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg",
-      price: 4900,
-      userId: "qsomihvqios",
-    },
-    {
-      _id: "oeihfzeomoihi",
-      title: "Mon deuxième objet",
-      description: "Les infos de mon deuxième objet",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg",
-      price: 2900,
-      userId: "qsomihvqios",
-    },
-  ];
-  res.status(200).json(stuff);
+
+app.get("/api/screenshots", (req, res, next) => {
+  Screenshots.find()
+    .then((screenshots) => res.send(screenshots))
+    .catch((error) => res.status(400).json({ error }));
 });
 module.exports = app;

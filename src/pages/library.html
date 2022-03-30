@@ -11,6 +11,11 @@
   <body>
     <div id="libraryContent">
       <h1 id="libraryTitle">Screenshots Library</h1>
+      <div id="carouselBlock">
+        <i class="arrow"><img src="../assets/images/arrowLeft.png" /></i>
+        <div id="imgContainer"></div>
+        <i class="arrow"><img src="../assets/images/arrowRight.png" /></i>
+      </div>
       <button>Add a screenshot</button>
     </div>
 
@@ -36,18 +41,18 @@
         ></i>
         <h2>Add your screenshot</h2>
         <p></p>
-        <form action="/api/library" method="post">
+        <form method="POST" action="/api/screenshots">
           <label for="author">Name or Pseudo :</label>
           <input type="text" name="author" id="author" />
           <label for="description">Description :</label>
           <textarea name="description" id="description" rows="3"></textarea>
           <label for="imageUrl">Image URL : </label>
-          <input type="url" id="imageUrl" />
+          <input type="url" name="imageUrl" id="imageUrl" />
           <button type="submit">Add this screenshot</button>
         </form>
       </div>
     </div>
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
-    <script src="../assets/script/library.js"></script>
+    <script type="module" src="../assets/script/library.js"></script>
   </body>
 </html>

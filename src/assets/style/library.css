@@ -17,6 +17,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 #libraryContent h1 {
@@ -32,6 +33,7 @@ body {
   height: 65px;
   font-size: 32px;
   color: white;
+  margin-top: 25px;
 }
 
 #libraryContent button:hover {
@@ -43,4 +45,33 @@ body {
   background: rgba(255, 255, 255, 0.9);
   color: #0e1333;
   border: 3px solid #0e1333;
+}
+#imgContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 75%;
+}
+#imgContainer img {
+  width: 350px;
+  object-fit: cover;
+  border: 3px solid white;
+  margin: 15px;
+}
+#imgContainer img:hover {
+  cursor: pointer;
+  transform: scale(1.1, 1.1);
+}
+#carouselBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.arrow {
+  align-self: center;
+}
+
+.arrow:hover {
+  cursor: pointer;
+  transform: scale(1.2, 1.2);
 }
