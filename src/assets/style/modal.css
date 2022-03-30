@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#modalImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid black;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+#modalImage img {
+  object-fit: fill;
+  max-width: 100%;
+  max-height: 100%;
+}
+#modalDescription {
+  width: 100%;
+  position: absolute;
+  bottom: -13%;
+  background: rgba(14, 19, 51, 0.3);
+  color: rgba(255, 255, 255, 0.3);
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@keyframes modalDesc {
+  from {
+    bottom: -13%;
+  }
+  to {
+    bottom: 0%;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(14, 19, 51, 0.75);
+  }
+}
+#modalDescription:hover {
+  animation-name: modalDesc;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+#modalDescription h2 {
+  padding: 15px;
+  font-size: 32px;
+}
+
+#modalDescription p {
+  position: absolute;
+  bottom: 25%;
+  left: 15px;
+  font-size: 24px;
+  max-width: 80%;
+}

@@ -50,11 +50,14 @@ const myInit = {
 };
 
 let screenshotsList = [];
-fetch("/api/screenshots", myInit)
+
+await fetch("/api/screenshots", myInit)
   .then(function (screenshots) {
     return screenshots.json();
   })
   .then(function (screenshots) {
+    //Création d'un objet de la classe screenshot pour chaque
+    //objet contenu dans la BDD
     screenshots.forEach((element) => {
       let newScreen = new Screenshot(
         element.author,
@@ -63,8 +66,12 @@ fetch("/api/screenshots", myInit)
       );
       screenshotsList.push(newScreen);
     });
-    console.log(screenshotsList);
     screenshotsList.forEach((element) => {
-      imgContainer.appendChild(element.createImage());
+      //Ajout de toutes les images dans la div #imgContainer
+      imgContainer.appendChild(element.image);
+      //Evènement pour écouter le click sur chaque image
+      element.image.addEventListener("click", () => {
+        console.log(element.author);
+      });
     });
   });

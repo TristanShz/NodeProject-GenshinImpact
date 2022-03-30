@@ -3,11 +3,7 @@ export class Screenshot {
     this.author = author;
     this.description = desc;
     this.url = url;
-  }
-
-  createImage() {
-    let image = document.createElement("img");
-    image.setAttribute("src", this.url);
-    return image;
+    this.image = document.createElement("img");
+    this.image.setAttribute("src", this.url);
   }
 }
