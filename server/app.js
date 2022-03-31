@@ -31,7 +31,7 @@ app.get("/library", (req, res) => {
   res.sendFile(path.join(__dirname, distDir, "/pages/library.html"));
 });
 
-//Route Post qui crée un nouvel objet à partir du model Screenshots et qui l'enregistre dans la BDD
+//CREATE
 app.post("/api/screenshots", (req, res, next) => {
   console.log(Screenshots);
   console.log(req.body);
@@ -44,9 +44,17 @@ app.post("/api/screenshots", (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 });
 
+//READ
 app.get("/api/screenshots", (req, res, next) => {
   Screenshots.find()
     .then((screenshots) => res.send(screenshots))
+    .catch((error) => res.status(400).json({ error }));
+});
+
+//DELETE
+app.delete("/api/screenshots/:id", (req, res, next) => {
+  Screenshots.deleteOne({ _id: req.params.id })
+    .then(() => res.status(200).json({ message: "Objet supprimé !" }))
     .catch((error) => res.status(400).json({ error }));
 });
 module.exports = app;

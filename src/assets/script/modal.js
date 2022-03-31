@@ -1,8 +1,4 @@
 const modalContainer = document.querySelector("#modalImage");
-const closeModal = document.querySelector("#closeModal");
-const modalAuthor = document.querySelector("#modalAuthor");
-const modalDescription = document.querySelector("#modalDescription");
-const modalImage = document.querySelector("#modalImage img");
 const libraryContent = document.querySelector("#libraryContent");
 
 export class Modal {
@@ -22,19 +18,49 @@ export class Modal {
     this.description = document.createElement("p");
     this.description.innerText = description;
 
+    //Icone Edit
+    this.editModal = document.createElement("i");
+    this.editModalPng = document.createElement("img");
+    this.editModal.setAttribute("id", "editItem");
+    this.editModalPng.src = "../assets/images/edit.png";
+    this.editModal.appendChild(this.editModalPng);
+
+    //Icone Delete
+    this.deleteModal = document.createElement("i");
+    this.deleteModalPng = document.createElement("img");
+    this.deleteModal.setAttribute("id", "deleteItem");
+    this.deleteModalPng.src = "../assets/images/delete.png";
+    this.deleteModal.appendChild(this.deleteModalPng);
+
+    this.iconDescription = document.createElement("div");
+    this.iconDescription.setAttribute("id", "iconDescription");
+    this.iconDescription.append(this.editModal, this.deleteModal);
+
     this.modalDescription.append(
       this.descriptionTitle,
       this.author,
-      this.description
+      this.description,
+      this.iconDescription
     );
-    modalContainer.append(this.image, this.modalDescription);
+    //Croix permettant de fermer la modal
+    this.closeModal = document.createElement("i");
+    this.closeModalPng = document.createElement("img");
+    this.closeModal.setAttribute("id", "closeModal");
+    this.closeModalPng.src = "../assets/images/close.png";
+    this.closeModal.appendChild(this.closeModalPng);
+  }
+
+  open() {
+    modalContainer.style.display = "block";
+    modalContainer.append(this.image, this.modalDescription, this.closeModal);
   }
 
   close() {
-    modalContainer.removeChild(
-      this.closeModal,
-      this.image,
-      this.modalDescription
-    );
+    modalContainer.style.display = "none";
+    let child = modalContainer.lastElementChild;
+    while (child) {
+      modalContainer.removeChild(child);
+      child = modalContainer.lastElementChild;
+    }
   }
 }

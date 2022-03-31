@@ -13,9 +13,12 @@ const descriptionPreview = document.querySelector(
 const imgPreview = document.querySelector("#imgPreview img");
 const imgContainer = document.querySelector("#imgContainer");
 const modalContainer = document.querySelector("#modalImage");
+const deleteIcon = document.querySelector("#deleteItem");
+const editIcon = document.querySelector("#editItem");
 /*-------------------------------------------------------*/
 import { Screenshot } from "./Screenshot.js";
 import { Modal } from "./modal.js";
+import { deleteItem } from "./deleteItem.js";
 /*------------------FORM POPUP CONTENT-------------------*/
 //Open form popup
 addScreenshotButton.addEventListener("click", () => {
@@ -62,34 +65,32 @@ await fetch("/api/screenshots", myInit)
     //objet contenu dans la BDD
     screenshots.forEach((element) => {
       let newScreen = new Screenshot(
+        element._id,
         element.author,
         element.description,
         element.imageUrl
       );
       screenshotsList.push(newScreen);
     });
-    screenshotsList.forEach((element) => {
-      //Ajout de toutes les images dans la div #imgContainer
-      imgContainer.appendChild(element.image);
-      //Evènement pour écouter le click sur chaque image
-      element.image.addEventListener("click", () => {
-        myModal = new Modal(element.author, element.description, element.url);
+  });
 
-        libraryContent.append(myModal);
-
-        const closeModal = document.createElement("i");
-        closeModal.setAttribute("id", "closeModal");
-        const closeModalPng = document.createElement("img");
-        closeModalPng.src = "../assets/images/close.png";
-        closeModal.appendChild(closeModalPng);
-        modalContainer.appendChild(closeModal);
-        document.getElementById("closeModal").addEventListener("click", () => {
-          let child = modalContainer.lastElementChild;
-          while (child) {
-            modalContainer.removeChild(child);
-            child = modalContainer.lastElementChild;
-          }
-        });
+screenshotsList.forEach((element) => {
+  //Ajout de toutes les images dans la div #imgContainer
+  imgContainer.appendChild(element.image);
+  //Ecoute du clic sur chaque image
+  element.image.addEventListener("click", () => {
+    console.log(element);
+    //Création et insertion de la modal dans le dom
+    myModal = new Modal(element.author, element.description, element.url);
+    myModal.open();
+    if (deleteIcon) {
+      deleteIcon.addEventListener("click", () => {
+        deleteItem(element.id);
       });
+    }
+    //Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
+    document.getElementById("closeModal").addEventListener("click", () => {
+      myModal.close();
     });
   });
+});

@@ -1,5 +1,6 @@
 export class Screenshot {
-  constructor(author, desc, url) {
+  constructor(id,author, desc, url) {
+    this.id = id;
     this.author = author;
     this.description = desc;
     this.url = url;
