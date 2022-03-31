@@ -12,9 +12,10 @@ const descriptionPreview = document.querySelector(
 );
 const imgPreview = document.querySelector("#imgPreview img");
 const imgContainer = document.querySelector("#imgContainer");
+const modalContainer = document.querySelector("#modalImage");
 /*-------------------------------------------------------*/
 import { Screenshot } from "./Screenshot.js";
-import { modalDisplay } from "./modal.js";
+import { Modal } from "./modal.js";
 /*------------------FORM POPUP CONTENT-------------------*/
 //Open form popup
 addScreenshotButton.addEventListener("click", () => {
@@ -51,7 +52,7 @@ const myInit = {
 };
 
 let screenshotsList = [];
-
+let myModal;
 await fetch("/api/screenshots", myInit)
   .then(function (screenshots) {
     return screenshots.json();
@@ -72,7 +73,23 @@ await fetch("/api/screenshots", myInit)
       imgContainer.appendChild(element.image);
       //Evènement pour écouter le click sur chaque image
       element.image.addEventListener("click", () => {
-        modalDisplay(element.author, element.description, element.url);
+        myModal = new Modal(element.author, element.description, element.url);
+
+        libraryContent.append(myModal);
+
+        const closeModal = document.createElement("i");
+        closeModal.setAttribute("id", "closeModal");
+        const closeModalPng = document.createElement("img");
+        closeModalPng.src = "../assets/images/close.png";
+        closeModal.appendChild(closeModalPng);
+        modalContainer.appendChild(closeModal);
+        document.getElementById("closeModal").addEventListener("click", () => {
+          let child = modalContainer.lastElementChild;
+          while (child) {
+            modalContainer.removeChild(child);
+            child = modalContainer.lastElementChild;
+          }
+        });
       });
     });
   });

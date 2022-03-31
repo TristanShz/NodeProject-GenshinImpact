@@ -1,22 +1,40 @@
 const modalContainer = document.querySelector("#modalImage");
 const closeModal = document.querySelector("#closeModal");
 const modalAuthor = document.querySelector("#modalAuthor");
-const modalDescription = document.querySelector("#modalDescription p");
+const modalDescription = document.querySelector("#modalDescription");
 const modalImage = document.querySelector("#modalImage img");
 const libraryContent = document.querySelector("#libraryContent");
 
-export function modalDisplay(author, description, imageUrl) {
-  console.log("author : ", author);
-  console.log("description : ", description);
-  console.log("url : ", imageUrl);
-  modalContainer.style.display = "block";
-  modalImage.setAttribute("src", imageUrl);
-  modalAuthor.innerText = `Author : ${author}`;
-  modalDescription.innerText = description;
-  libraryContent.style.opacity = "0";
+export class Modal {
+  constructor(author, description, imageUrl) {
+    this.image = document.createElement("img");
+    this.image.src = imageUrl;
 
-  closeModal.addEventListener("click", () => {
-    modalContainer.style.display = "none";
-    libraryContent.style.opacity = "1";
-  });
+    this.modalDescription = document.createElement("div");
+    this.modalDescription.setAttribute("id", "modalDescription");
+
+    this.author = document.createElement("h2");
+    this.author.innerText = `Author : ${author}`;
+
+    this.descriptionTitle = document.createElement("h2");
+    this.descriptionTitle.innerText = "Description : ";
+
+    this.description = document.createElement("p");
+    this.description.innerText = description;
+
+    this.modalDescription.append(
+      this.descriptionTitle,
+      this.author,
+      this.description
+    );
+    modalContainer.append(this.image, this.modalDescription);
+  }
+
+  close() {
+    modalContainer.removeChild(
+      this.closeModal,
+      this.image,
+      this.modalDescription
+    );
+  }
 }

@@ -27,7 +27,6 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
   box-shadow: 10px 10px 60px #555;
-  display: none;
 }
 
 #modalImage img {
@@ -38,7 +37,7 @@
 #modalDescription {
   width: 100%;
   position: absolute;
-  bottom: -13%;
+  bottom: -12%;
   background: rgba(14, 19, 51, 0.5);
   color: rgba(255, 255, 255, 0.5);
   height: 20%;
@@ -48,7 +47,7 @@
 
 @keyframes modalDesc {
   from {
-    bottom: -13%;
+    bottom: -12%;
   }
   to {
     bottom: 0%;
