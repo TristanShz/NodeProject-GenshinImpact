@@ -16,9 +16,9 @@ const modalContainer = document.querySelector("#modalImage");
 const deleteIcon = document.querySelector("#deleteItem");
 const editIcon = document.querySelector("#editItem");
 /*-------------------------------------------------------*/
-import { Screenshot } from "./Screenshot.js";
 import { Modal } from "./Modal.js";
-import { deleteItem } from "./deleteItem.js";
+import { deleteItem } from "./crud/deleteItem.js";
+import { readItems } from "./crud/readItems.js";
 /*------------------FORM POPUP CONTENT-------------------*/
 //Open form popup
 addScreenshotButton.addEventListener("click", () => {
@@ -44,38 +44,9 @@ imageUrl.addEventListener("input", (content) => {
   imgPreview.setAttribute("src", content.target.value);
 });
 /*-------------------------------------------------------*/
-
-const myHeaders = new Headers();
-
-const myInit = {
-  method: "GET",
-  headers: myHeaders,
-  mode: "cors",
-  cache: "default",
-};
-
-let screenshotsList = [];
 let myModal;
-await fetch("/api/screenshots", myInit)
-  .then(function (screenshots) {
-    if (screenshots.ok) {
-      return screenshots.json();
-    }
-    return Promise.reject(screenshots);
-  })
-  .then(function (screenshots) {
-    //Création d'un objet de la classe screenshot pour chaque
-    //objet contenu dans la BDD
-    screenshots.forEach((element) => {
-      let newScreen = new Screenshot(
-        element._id,
-        element.author,
-        element.description,
-        element.imageUrl
-      );
-      screenshotsList.push(newScreen);
-    });
-  });
+
+let screenshotsList = await readItems();
 
 screenshotsList.forEach((element) => {
   //Ajout de toutes les images dans la div #imgContainer

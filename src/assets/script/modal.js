@@ -32,10 +32,12 @@ export class Modal {
     this.deleteModalPng.src = "../assets/images/delete.png";
     this.deleteModal.appendChild(this.deleteModalPng);
 
+    //Insertion des Icones Edit et Delete dans une div
     this.iconDescription = document.createElement("div");
     this.iconDescription.setAttribute("id", "iconDescription");
     this.iconDescription.append(this.editModal, this.deleteModal);
 
+    //Création du bloc modalDescription
     this.modalDescription.append(
       this.descriptionTitle,
       this.author,
