@@ -1,4 +1,4 @@
-export function deleteItem(id) {
+export function deleteItem(element) {
   const myHeaders = new Headers();
 
   const myInit = {
@@ -8,7 +8,13 @@ export function deleteItem(id) {
     cache: "default",
   };
 
-  fetch(`/api/screenshots/${id}`, myInit).then(function (response) {
-    return response;
-  });
+  fetch(`/api/screenshots/${element.id}`, myInit)
+    .then(function (response) {
+      if (response.ok) {
+        element.delete();
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }

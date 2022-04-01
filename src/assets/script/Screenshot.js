@@ -1,10 +1,16 @@
+const imgContainer = document.querySelector("#imgContainer");
+
 export class Screenshot {
-  constructor(id,author, desc, url) {
+  constructor(id, author, desc, url) {
     this.id = id;
     this.author = author;
     this.description = desc;
     this.url = url;
     this.image = document.createElement("img");
     this.image.setAttribute("src", this.url);
+  }
+
+  delete() {
+    imgContainer.removeChild(this.image);
   }
 }

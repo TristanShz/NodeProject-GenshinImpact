@@ -17,7 +17,7 @@ const deleteIcon = document.querySelector("#deleteItem");
 const editIcon = document.querySelector("#editItem");
 /*-------------------------------------------------------*/
 import { Screenshot } from "./Screenshot.js";
-import { Modal } from "./modal.js";
+import { Modal } from "./Modal.js";
 import { deleteItem } from "./deleteItem.js";
 /*------------------FORM POPUP CONTENT-------------------*/
 //Open form popup
@@ -58,7 +58,10 @@ let screenshotsList = [];
 let myModal;
 await fetch("/api/screenshots", myInit)
   .then(function (screenshots) {
-    return screenshots.json();
+    if (screenshots.ok) {
+      return screenshots.json();
+    }
+    return Promise.reject(screenshots);
   })
   .then(function (screenshots) {
     //Création d'un objet de la classe screenshot pour chaque
@@ -79,15 +82,18 @@ screenshotsList.forEach((element) => {
   imgContainer.appendChild(element.image);
   //Ecoute du clic sur chaque image
   element.image.addEventListener("click", () => {
-    console.log(element);
     //Création et insertion de la modal dans le dom
     myModal = new Modal(element.author, element.description, element.url);
     myModal.open();
-    if (deleteIcon) {
-      deleteIcon.addEventListener("click", () => {
-        deleteItem(element.id);
-      });
-    }
+
+    //Suppression d'un element
+    myModal.deleteModal.addEventListener("click", () => {
+      let isConfirm = confirm("Are you sure to delete this screenshot ?");
+      if (isConfirm) {
+        deleteItem(element);
+        myModal.close();
+      }
+    });
     //Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
     document.getElementById("closeModal").addEventListener("click", () => {
       myModal.close();

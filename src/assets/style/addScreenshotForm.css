@@ -1,9 +1,12 @@
-#addScreenshotPopup {
+#addScreenshotForm {
+  background: #0e1333;
+  color: white;
+  padding: 0 40px;
+  font-size: 30px;
   position: absolute;
-  width: 85%;
-  height: 80%;
-  display: none;
-  max-width: 85%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -12,31 +15,21 @@
     rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
-#closePopup {
-  color: white;
-  font-size: 48px;
+#addScreenshotForm i {
   position: absolute;
   right: 0px;
+  top: 0px;
 }
-#closePopup:hover {
+
+#addScreenshotForm i:hover {
   cursor: pointer;
-}
-#preview {
-  background: white;
-  width: 70%;
-  height: 100%;
-}
-#addScreenshotForm {
-  width: 30%;
-  background: #0e1333;
-  color: white;
-  padding: 0 15px;
-  font-size: 30px;
+  transform: scale(0.9, 0.9);
 }
 
 #addScreenshotForm h2 {
   margin-bottom: 30px;
-  margin-top: 90px;
+  margin-top: 30px;
+  align-self: center;
 }
 #addScreenshotForm form {
   display: flex;
@@ -59,55 +52,26 @@ textarea {
   margin-bottom: 25px;
   font-size: 30px;
 }
+
+#addScreenshotForm form img {
+  width: 60%;
+  border: 3px solid white;
+}
 #addScreenshotForm button {
   margin-top: 25px;
-  width: 100%;
+  margin-bottom: 25px;
   background: white;
   color: #0e1333;
   border: none;
   border-radius: 50px;
   height: 65px;
   font-size: 32px;
+  width: 80%;
+  align-self: center;
 }
 
 #addScreenshotForm button:hover {
   background: white;
   border: 5px solid green;
   cursor: pointer;
-}
-
-/* PREVIEW CONTENT IN THE FORM */
-
-#preview {
-  display: flex;
-  flex-direction: column;
-}
-
-#preview img {
-  width: 100%;
-  height: 100%;
-}
-
-#imageDescriptionPreview {
-  background: white;
-  color: #0e1333;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-}
-
-#authorPreview {
-  display: flex;
-}
-
-#descriptionPreview {
-  display: flex;
-  flex-direction: column;
-  max-width: 70%;
-}
-
-#descriptionPreview p {
-  font-size: 24px;
-  word-break: break-word;
 }

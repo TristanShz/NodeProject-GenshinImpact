@@ -33,14 +33,12 @@ app.get("/library", (req, res) => {
 
 //CREATE
 app.post("/api/screenshots", (req, res, next) => {
-  console.log(Screenshots);
-  console.log(req.body);
   const screenshot = new Screenshots({
     ...req.body,
   });
   screenshot
     .save()
-    .then(() => res.status(201).json({ message: "Objet enregistré" }))
+    .then(() => res.status(201).redirect("/library"))
     .catch((error) => res.status(400).json({ error }));
 });
 

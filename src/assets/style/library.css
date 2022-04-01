@@ -60,6 +60,8 @@ body {
 }
 #imgContainer img {
   width: 350px;
+  min-width: 350px;
+  min-height: 203px;
   object-fit: cover;
   border: 3px solid white;
   margin: 15px;
