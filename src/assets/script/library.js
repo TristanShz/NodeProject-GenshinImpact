@@ -1,47 +1,37 @@
 /*-------------DOM ELEMENTS-------------------------------*/
 const libraryContent = document.querySelector("#libraryContent");
 const addScreenshotButton = document.querySelector("#libraryContent button");
-const addScreenshotPopup = document.querySelector("#addScreenshotPopup");
+const addScreenshotForm = document.querySelector("#addScreenshotForm");
 const closePopup = document.querySelector("#closePopup");
-const author = document.querySelector("#author");
+
 const description = document.querySelector("#description");
 const imageUrl = document.querySelector("#imageUrl");
-const authorPreview = document.querySelector("#authorPreview #content");
-const descriptionPreview = document.querySelector(
-  "#descriptionPreview #content"
-);
-const imgPreview = document.querySelector("#imgPreview img");
 const imgContainer = document.querySelector("#imgContainer");
 const modalContainer = document.querySelector("#modalImage");
-const deleteIcon = document.querySelector("#deleteItem");
-const editIcon = document.querySelector("#editItem");
 /*-------------------------------------------------------*/
 import { Modal } from "./Modal.js";
 import { deleteItem } from "./crud/deleteItem.js";
 import { readItems } from "./crud/readItems.js";
+import { ScreenshotForm } from "./class/AddScreenshotForm.js";
 /*------------------FORM POPUP CONTENT-------------------*/
+let form = new ScreenshotForm();
+
 //Open form popup
-addScreenshotButton.addEventListener("click", () => {
-  addScreenshotPopup.style.display = "flex";
-});
-
+addScreenshotButton.addEventListener("click", () => form.open());
 //Close form popup
+form.closeButton.addEventListener("click", () => form.close());
 
-closePopup.addEventListener("click", () => {
-  addScreenshotPopup.style.display = "none";
+//Check des input
+form.author.input.addEventListener("input", (content) => {
+  form.authorValidation(content.target.value);
 });
 
-//Content Preview
-author.addEventListener("input", (content) => {
-  authorPreview.innerText = content.target.value;
+form.description.input.addEventListener("input", (content) => {
+  form.descriptionValidation(content.target.value);
 });
 
-description.addEventListener("input", (content) => {
-  descriptionPreview.innerText = content.target.value;
-});
-
-imageUrl.addEventListener("input", (content) => {
-  imgPreview.setAttribute("src", content.target.value);
+form.imageUrl.input.addEventListener("input", (content) => {
+  form.imageUrlValidation(content.target.value);
 });
 /*-------------------------------------------------------*/
 let myModal;

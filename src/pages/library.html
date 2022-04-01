@@ -28,21 +28,27 @@
 
     <div id="addScreenshotForm">
       <i id="closePopup"
-        ><img src="../assets/images/closeWhite.png" alt=""></span
-      ></i>
+        ><img src="../assets/images/closeWhite.png" alt=""
+      /></i>
       <h2>Add your screenshot</h2>
-      <form method="POST" action="/api/screenshots">
-        <label for="author">Name or Pseudo :</label>
-        <input type="text" name="author" id="author" />
-        <label for="description">Description :</label>
-        <textarea name="description" id="description" rows="3"></textarea>
-        <label for="imageUrl">Image URL : </label>
-        <input type="url" name="imageUrl" id="imageUrl" />
-        <img
-          src="https://sm.ign.com/t/ign_ap/screenshot/default/51004134082-015cbdf54e-k-1615066011423_q22c.1080.jpg"
-          alt=""
-        />
-        <button type="submit">Add this screenshot</button>
+      <form>
+        <div id="author">
+          <label for="author" class="formLabel">Name or Pseudo :</label>
+          <input type="text" name="author" />
+          <span></span>
+        </div>
+        <div id="description">
+          <label for="description" class="formLabel">Description :</label>
+          <textarea name="description" rows="3"></textarea>
+          <span></span>
+        </div>
+        <div id="imageUrl">
+          <label for="imageUrl" class="formLabel">Image URL : </label>
+          <input type="url" name="imageUrl" />
+          <span></span>
+          <img />
+        </div>
+        <button>Add this screenshot</button>
       </form>
     </div>
 

@@ -1,4 +1,4 @@
-import { Screenshot } from "../Screenshot.js";
+import { Screenshot } from "../class/Screenshot.js";
 
 export async function readItems() {
   const myHeaders = new Headers();
