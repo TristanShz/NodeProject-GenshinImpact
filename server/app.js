@@ -33,6 +33,7 @@ app.get("/library", (req, res) => {
 
 //CREATE
 app.post("/api/screenshots", (req, res, next) => {
+  console.log(req);
   const screenshot = new Screenshots({
     ...req.body,
   });

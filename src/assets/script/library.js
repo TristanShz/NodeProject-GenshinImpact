@@ -13,6 +13,7 @@ import { Modal } from "./Modal.js";
 import { deleteItem } from "./crud/deleteItem.js";
 import { readItems } from "./crud/readItems.js";
 import { ScreenshotForm } from "./class/AddScreenshotForm.js";
+
 /*------------------FORM POPUP CONTENT-------------------*/
 let form = new ScreenshotForm();
 
@@ -32,6 +33,11 @@ form.description.input.addEventListener("input", (content) => {
 
 form.imageUrl.input.addEventListener("input", (content) => {
   form.imageUrlValidation(content.target.value);
+});
+
+form.sendButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  form.sendForm();
 });
 /*-------------------------------------------------------*/
 let myModal;
