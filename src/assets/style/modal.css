@@ -30,6 +30,7 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
   box-shadow: 10px 10px 60px #555;
+  z-index: 999;
 }
 
 #modalImage img {

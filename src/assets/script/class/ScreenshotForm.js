@@ -1,8 +1,10 @@
+const blurryContent = document.querySelector("#blurryContent");
 import { addItem } from "../crud/addItem.js";
 
 export class ScreenshotForm {
-  constructor(screnshot) {
+  constructor() {
     this.div = document.querySelector("#addScreenshotForm");
+    this.formTitle = document.querySelector("#addScreenshotForm h2");
 
     this.author = {
       div: document.querySelector("#author"),
@@ -31,12 +33,27 @@ export class ScreenshotForm {
 
     this.sendButton = document.querySelector("#addScreenshotForm form button");
   }
-  open() {
+  open(screenshot) {
+    if (screenshot) {
+      this.formTitle.innerText = "Edit screenshot";
+      this.author.input.value = screenshot.author;
+      this.description.input.value = screenshot.description;
+      this.imageUrl.input.value = screenshot.url;
+      this.sendButton.innerText = "Edit screenshot";
+    } else {
+      this.formTitle.innerText = "Add your screenshot";
+      this.author.input.value = "";
+      this.description.input.value = "";
+      this.imageUrl.input.value = "";
+      this.sendButton.innerText = "Add screenshot";
+    }
     this.div.style.display = "flex";
+    blurryContent.style.display = "block";
   }
 
   close() {
     this.div.style.display = "none";
+    blurryContent.style.display = "none";
   }
 
   inputError(element, message) {
@@ -83,9 +100,6 @@ export class ScreenshotForm {
         this.inputError(this.imageUrl, "Votre image est trop petite");
       }
     }
-    console.log(this.imagePreview.width, this.imagePreview.height);
-    console.log(linkIsValid);
-    console.log(this.imagePreview);
     if (this.imagePreview.src) {
       this.inputValid(this.imageUrl);
       this.imageUrl.div.appendChild(this.imagePreview);

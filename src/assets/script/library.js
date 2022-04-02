@@ -9,10 +9,10 @@ const imageUrl = document.querySelector("#imageUrl");
 const imgContainer = document.querySelector("#imgContainer");
 const modalContainer = document.querySelector("#modalImage");
 /*-------------------------------------------------------*/
-import { Modal } from "./Modal.js";
+import { Modal } from "./class/Modal.js";
 import { deleteItem } from "./crud/deleteItem.js";
 import { readItems } from "./crud/readItems.js";
-import { ScreenshotForm } from "./class/AddScreenshotForm.js";
+import { ScreenshotForm } from "./class/ScreenshotForm.js";
 
 /*------------------FORM POPUP CONTENT-------------------*/
 let form = new ScreenshotForm();
@@ -54,8 +54,13 @@ screenshotsList.forEach((element) => {
     myModal = new Modal(element.author, element.description, element.url);
     myModal.open();
 
+    //Edition d'un element
+    myModal.editIcon.addEventListener("click", () => {
+      myModal.close();
+      form.open(element);
+    });
     //Suppression d'un element
-    myModal.deleteModal.addEventListener("click", () => {
+    myModal.deleteIcon.addEventListener("click", () => {
       let isConfirm = confirm("Are you sure to delete this screenshot ?");
       if (isConfirm) {
         deleteItem(element);

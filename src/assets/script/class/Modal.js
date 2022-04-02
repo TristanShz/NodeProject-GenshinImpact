@@ -1,6 +1,5 @@
 const modalContainer = document.querySelector("#modalImage");
-const libraryContent = document.querySelector("#libraryContent");
-
+const blurryContent = document.querySelector("#blurryContent");
 export class Modal {
   constructor(author, description, imageUrl) {
     this.image = document.createElement("img");
@@ -19,23 +18,23 @@ export class Modal {
     this.description.innerText = description;
 
     //Icone Edit
-    this.editModal = document.createElement("i");
-    this.editModalPng = document.createElement("img");
-    this.editModal.setAttribute("id", "editItem");
-    this.editModalPng.src = "../assets/images/edit.png";
-    this.editModal.appendChild(this.editModalPng);
+    this.editIcon = document.createElement("i");
+    this.editIconPng = document.createElement("img");
+    this.editIcon.setAttribute("id", "editItem");
+    this.editIconPng.src = "../assets/images/edit.png";
+    this.editIcon.appendChild(this.editIconPng);
 
     //Icone Delete
-    this.deleteModal = document.createElement("i");
-    this.deleteModalPng = document.createElement("img");
-    this.deleteModal.setAttribute("id", "deleteItem");
-    this.deleteModalPng.src = "../assets/images/delete.png";
-    this.deleteModal.appendChild(this.deleteModalPng);
+    this.deleteIcon = document.createElement("i");
+    this.deleteIconPng = document.createElement("img");
+    this.deleteIcon.setAttribute("id", "deleteItem");
+    this.deleteIconPng.src = "../assets/images/delete.png";
+    this.deleteIcon.appendChild(this.deleteIconPng);
 
     //Insertion des Icones Edit et Delete dans une div
     this.iconDescription = document.createElement("div");
     this.iconDescription.setAttribute("id", "iconDescription");
-    this.iconDescription.append(this.editModal, this.deleteModal);
+    this.iconDescription.append(this.editIcon, this.deleteIcon);
 
     //Création du bloc modalDescription
     this.modalDescription.append(
@@ -55,6 +54,7 @@ export class Modal {
   open() {
     modalContainer.style.display = "block";
     modalContainer.append(this.image, this.modalDescription, this.closeModal);
+    blurryContent.style.display = "block";
   }
 
   close() {
@@ -64,5 +64,6 @@ export class Modal {
       modalContainer.removeChild(child);
       child = modalContainer.lastElementChild;
     }
+    blurryContent.style.display = "none";
   }
 }

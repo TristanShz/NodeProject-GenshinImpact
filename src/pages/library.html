@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <link rel="stylesheet" href="../assets/style/library.css" />
-    <link rel="stylesheet" href="../assets/style/addScreenshotForm.css" />
+    <link rel="stylesheet" href="../assets/style/screenshotForm.css" />
     <link rel="stylesheet" href="../assets/style/modal.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,6 +16,7 @@
     />
   </head>
   <body>
+    <div id="blurryContent"></div>
     <div id="libraryContent">
       <h1 id="libraryTitle">Screenshots Library</h1>
       <div id="carouselBlock">
@@ -25,12 +26,11 @@
       </div>
       <button>Add a screenshot</button>
     </div>
-
     <div id="addScreenshotForm">
       <i id="closePopup"
         ><img src="../assets/images/closeWhite.png" alt=""
       /></i>
-      <h2>Add your screenshot</h2>
+      <h2></h2>
       <form>
         <div id="author">
           <label for="author" class="formLabel">Name or Pseudo :</label>
@@ -44,14 +44,22 @@
         </div>
         <div id="imageUrl">
           <label for="imageUrl" class="formLabel">Image URL : </label>
+          <span style="color: white; font-size: 14px; margin-bottom: 5px"
+            >Lien commençant par http ou https, finissant par une extension
+            d'image valide (exemple : http://mon-image.png)</span
+          >
+          <span style="color: white; font-size: 14px; margin-bottom: 5px"
+            >Taille minimale : 1000 x 600</span
+          >
           <input type="url" name="imageUrl" />
           <span></span>
         </div>
-        <button>Add this screenshot</button>
+        <button></button>
       </form>
     </div>
 
     <div id="modalImage"></div>
+
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
     <script type="module" src="../assets/script/library.js"></script>
   </body>
