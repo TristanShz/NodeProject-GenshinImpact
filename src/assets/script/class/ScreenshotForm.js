@@ -1,5 +1,6 @@
 const blurryContent = document.querySelector("#blurryContent");
 import { addItem } from "../crud/addItem.js";
+import { updateItem } from "../crud/updateItem.js";
 
 export class ScreenshotForm {
   constructor() {
@@ -32,20 +33,29 @@ export class ScreenshotForm {
     this.imagePreview = new Image();
 
     this.sendButton = document.querySelector("#addScreenshotForm form button");
+
+    this.isEditing = false;
   }
   open(screenshot) {
     if (screenshot) {
       this.formTitle.innerText = "Edit screenshot";
       this.author.input.value = screenshot.author;
+      this.author.isValid = true;
       this.description.input.value = screenshot.description;
+      this.description.isValid = true;
       this.imageUrl.input.value = screenshot.url;
+      this.imageUrl.isValid = true;
+      this.id = screenshot.id;
+      console.log(this.id);
       this.sendButton.innerText = "Edit screenshot";
+      this.isEditing = true;
     } else {
       this.formTitle.innerText = "Add your screenshot";
       this.author.input.value = "";
       this.description.input.value = "";
       this.imageUrl.input.value = "";
       this.sendButton.innerText = "Add screenshot";
+      this.isEditing = false;
     }
     this.div.style.display = "flex";
     blurryContent.style.display = "block";
@@ -121,6 +131,25 @@ export class ScreenshotForm {
         author: this.author.input.value,
         description: this.description.input.value,
         imageUrl: this.imageUrl.input.value,
+      });
+      this.close();
+      location.href = "/library";
+    } else {
+      console.log("erreur lors de l'envoie du formulaire");
+    }
+  }
+
+  updateForm() {
+    if (
+      this.author.isValid &&
+      this.description.isValid &&
+      this.imageUrl.isValid
+    ) {
+      updateItem({
+        author: this.author.input.value,
+        description: this.description.input.value,
+        imageUrl: this.imageUrl.input.value,
+        id: this.id,
       });
       this.close();
       location.href = "/library";

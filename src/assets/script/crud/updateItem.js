@@ -1,14 +1,14 @@
-export function addItem(element) {
+export function updateItem(screenshot) {
   const myInit = {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(element),
+    body: JSON.stringify(screenshot),
   };
-  
-  fetch("/api/screenshots", myInit)
+
+  fetch(`/api/screenshots/${screenshot.id}`, myInit)
     .then(function (response) {
       if (response.ok) {
-        console.log("element ajouté");
+        console.log("screenshot modifié");
       }
     })
     .catch(function (error) {

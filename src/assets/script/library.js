@@ -38,7 +38,8 @@ form.imageUrl.input.addEventListener("input", (content) => {
 //Envoi du formulaire
 form.sendButton.addEventListener("click", (event) => {
   event.preventDefault();
-  form.sendForm();
+  if (form.isEditing) form.updateForm();
+  else form.sendForm();
 });
 /*-------------------------------------------------------*/
 let myModal;
