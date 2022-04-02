@@ -71,22 +71,29 @@ export class ScreenshotForm {
   }
 
   imageUrlValidation(content) {
+    if (this.imagePreview.src) this.imagePreview.removeAttribute("src");
     let linkIsValid = /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(
       content
     );
+
     if (linkIsValid) {
       this.imagePreview.src = content;
-    } else {
-      this.inputError(this.imageUrl, "Votre lien n'est pas valide");
-      this.imagePreview.src = "";
+      if (this.imagePreview.width < 1000 || this.imagePreview.height < 600) {
+        this.imagePreview.removeAttribute("src");
+        this.inputError(this.imageUrl, "Votre image est trop petite");
+      }
     }
-    if (this.imagePreview.width > 0 && this.imagePreview.height > 0) {
+    console.log(this.imagePreview.width, this.imagePreview.height);
+    console.log(linkIsValid);
+    console.log(this.imagePreview);
+    if (this.imagePreview.src) {
       this.inputValid(this.imageUrl);
       this.imageUrl.div.appendChild(this.imagePreview);
     } else {
       this.inputError(this.imageUrl, "Votre lien n'est pas valide");
-      this.imageUrl.div.removeChild(this.imagePreview);
-      this.imagePreview.src = "";
+      if (this.imageUrl.div.lastElementChild == this.imagePreview) {
+        this.imageUrl.div.removeChild(this.imagePreview);
+      }
     }
   }
 
@@ -102,7 +109,7 @@ export class ScreenshotForm {
         imageUrl: this.imageUrl.input.value,
       });
       this.close();
-      location.href("/library");
+      location.href = "/library";
     } else {
       console.log("erreur lors de l'envoie du formulaire");
     }

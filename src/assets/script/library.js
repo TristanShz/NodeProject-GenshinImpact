@@ -35,6 +35,7 @@ form.imageUrl.input.addEventListener("input", (content) => {
   form.imageUrlValidation(content.target.value);
 });
 
+//Envoi du formulaire
 form.sendButton.addEventListener("click", (event) => {
   event.preventDefault();
   form.sendForm();
