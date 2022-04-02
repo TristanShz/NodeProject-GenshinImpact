@@ -50,6 +50,16 @@ app.get("/api/screenshots", (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 });
 
+//UPDATE
+app.put("/api/screenshots/:id", (req, res, next) => {
+  Screenshots.updateOne(
+    { _id: req.params.id },
+    { ...req.body, _id: req.params.id }
+  )
+    .then(() => res.status(200).json({ message: "Objet modifié !" }))
+    .catch((error) => res.status(400).json({ error }));
+});
+
 //DELETE
 app.delete("/api/screenshots/:id", (req, res, next) => {
   Screenshots.deleteOne({ _id: req.params.id })
