@@ -8,6 +8,7 @@ const description = document.querySelector("#description");
 const imageUrl = document.querySelector("#imageUrl");
 const imgContainer = document.querySelector("#imgContainer");
 const modalContainer = document.querySelector("#modalImage");
+
 /*-------------------------------------------------------*/
 import { Modal } from "./class/Modal.js";
 import { deleteItem } from "./crud/deleteItem.js";
@@ -31,16 +32,25 @@ form.description.input.addEventListener("input", (content) => {
   form.descriptionValidation(content.target.value);
 });
 
-form.imageUrl.input.addEventListener("input", (content) => {
-  form.imageUrlValidation(content.target.value);
+form.image.input.addEventListener("change", (event) => {
+  console.log(event.target.files[0]);
+  form.image.img.src = URL.createObjectURL(event.target.files[0]);
+  form.image.img.addEventListener("load", () => {
+    form.imageValidation(
+      form.image.img.naturalWidth,
+      form.image.img.naturalHeight
+    );
+  });
 });
 
-//Envoi du formulaire
-form.sendButton.addEventListener("click", (event) => {
+form.formElement.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (form.isEditing) form.updateForm();
-  else form.sendForm();
+  const formData = new FormData(this);
+  console.log(formData);
+  console.log(this);
 });
+//Envoi du formulaire
+form.sendButton.addEventListener("click", (event) => {});
 /*-------------------------------------------------------*/
 let myModal;
 

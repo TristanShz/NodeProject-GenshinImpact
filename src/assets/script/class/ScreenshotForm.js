@@ -5,6 +5,7 @@ import { updateItem } from "../crud/updateItem.js";
 export class ScreenshotForm {
   constructor() {
     this.div = document.querySelector("#addScreenshotForm");
+    this.formElement = document.querySelector("#addScreenshotForm form");
     this.formTitle = document.querySelector("#addScreenshotForm h2");
 
     this.author = {
@@ -21,16 +22,15 @@ export class ScreenshotForm {
       isValid: false,
     };
 
-    this.imageUrl = {
+    this.image = {
       div: document.querySelector("#imageUrl"),
       input: document.querySelector("#imageUrl input"),
-      span: document.querySelector("#imageUrl span"),
+      span: document.querySelector("#imageUrl").children[5],
+      img: document.querySelector("#imageOutput"),
       isValid: false,
     };
 
     this.closeButton = document.querySelector("#closePopup");
-
-    this.imagePreview = new Image();
 
     this.sendButton = document.querySelector("#addScreenshotForm form button");
 
@@ -43,8 +43,8 @@ export class ScreenshotForm {
       this.author.isValid = true;
       this.description.input.value = screenshot.description;
       this.description.isValid = true;
-      this.imageUrl.input.value = screenshot.url;
-      this.imageUrl.isValid = true;
+      this.image.input.value = screenshot.url;
+      this.image.isValid = true;
       this.id = screenshot.id;
       console.log(this.id);
       this.sendButton.innerText = "Edit screenshot";
@@ -53,7 +53,7 @@ export class ScreenshotForm {
       this.formTitle.innerText = "Add your screenshot";
       this.author.input.value = "";
       this.description.input.value = "";
-      this.imageUrl.input.value = "";
+      this.image.input.value = "";
       this.sendButton.innerText = "Add screenshot";
       this.isEditing = false;
     }
@@ -96,41 +96,19 @@ export class ScreenshotForm {
       this.inputValid(this.description);
     }
   }
-
-  imageUrlValidation(content) {
-    if (this.imagePreview.src) this.imagePreview.removeAttribute("src");
-    let linkIsValid = /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(
-      content
-    );
-
-    if (linkIsValid) {
-      this.imagePreview.src = content;
-      if (this.imagePreview.width < 1000 || this.imagePreview.height < 600) {
-        this.imagePreview.removeAttribute("src");
-        this.inputError(this.imageUrl, "Votre image est trop petite");
-      }
-    }
-    if (this.imagePreview.src) {
-      this.inputValid(this.imageUrl);
-      this.imageUrl.div.appendChild(this.imagePreview);
-    } else {
-      this.inputError(this.imageUrl, "Votre lien n'est pas valide");
-      if (this.imageUrl.div.lastElementChild == this.imagePreview) {
-        this.imageUrl.div.removeChild(this.imagePreview);
-      }
+  imageValidation(width, height) {
+    console.log(width, height);
+    if (width < 1000 || height < 600) {
+      this.inputError(this.image, "Image trop petite");
     }
   }
 
   sendForm() {
-    if (
-      this.author.isValid &&
-      this.description.isValid &&
-      this.imageUrl.isValid
-    ) {
+    if (this.author.isValid && this.description.isValid && this.image.isValid) {
       addItem({
         author: this.author.input.value,
         description: this.description.input.value,
-        imageUrl: this.imageUrl.input.value,
+        imageUrl: this.image.input.value,
       });
       this.close();
       location.href = "/library";
@@ -140,15 +118,11 @@ export class ScreenshotForm {
   }
 
   updateForm() {
-    if (
-      this.author.isValid &&
-      this.description.isValid &&
-      this.imageUrl.isValid
-    ) {
+    if (this.author.isValid && this.description.isValid && this.image.isValid) {
       updateItem({
         author: this.author.input.value,
         description: this.description.input.value,
-        imageUrl: this.imageUrl.input.value,
+        imageUrl: this.image.input.value,
         id: this.id,
       });
       this.close();
