@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 //Utilisation de mongoose pour se connecter à MongoDB
 const mongoose = require("mongoose");
+
 main().catch((err) => console.log(err));
 async function main() {
   mongoose
@@ -98,11 +99,16 @@ app.put("/api/screenshots/:id", (req, res, next) => {
 
 //DELETE
 app.delete("/api/screenshots/:id", (req, res, next) => {
-  // try{
-  //   fs.unlinkSync(req.params.image)
-  // }
+  /*On retrouve le screenshot concerné par la requête, afin de supprimer
+  son image associée dans le dossier uploads grâce au FileSystem. Puis le 
+  screenshot est supprimer de la base de donné avec la méthode .deleteOne de 
+  mongoose */
+  Screenshots.findOne({ _id: req.params.id }, (err, screenshot) => {
+    fs.unlinkSync(path.join(__dirname, distDir, "/uploads/", screenshot.image));
+  });
   Screenshots.deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: "Objet supprimé !" }))
     .catch((error) => res.status(400).json({ error }));
 });
+
 module.exports = app;
