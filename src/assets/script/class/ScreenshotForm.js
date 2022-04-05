@@ -40,10 +40,9 @@ export class ScreenshotForm {
       this.author.isValid = true;
       this.description.input.value = screenshot.description;
       this.description.isValid = true;
-      this.image.input.value = screenshot.url;
+      this.image.img.src = screenshot.image.src;
       this.image.isValid = true;
       this.id = screenshot.id;
-      console.log(this.id);
       this.sendButton.innerText = "Edit screenshot";
       this.isEditing = true;
     } else {
