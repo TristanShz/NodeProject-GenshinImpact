@@ -9,23 +9,20 @@ export class ScreenshotForm {
     this.formTitle = document.querySelector("#addScreenshotForm h2");
 
     this.author = {
-      div: document.querySelector("#author"),
-      input: document.querySelector("#author input"),
-      span: document.querySelector("#author span"),
+      input: document.querySelector("input[name='author']"),
+      span: document.querySelector("input[name='author']~span"),
       isValid: false,
     };
 
     this.description = {
-      div: document.querySelector("#description"),
-      input: document.querySelector("#description textarea"),
-      span: document.querySelector("#description span"),
+      input: document.querySelector("textarea[name='description']"),
+      span: document.querySelector("textarea[name='description']~span"),
       isValid: false,
     };
 
     this.image = {
-      div: document.querySelector("#imageUrl"),
-      input: document.querySelector("#imageUrl input"),
-      span: document.querySelector("#imageUrl").children[5],
+      input: document.querySelector("input[name='image']"),
+      span: document.querySelector("input[name='image']~span"),
       img: document.querySelector("#imageOutput"),
       isValid: false,
     };
@@ -100,20 +97,18 @@ export class ScreenshotForm {
     console.log(width, height);
     if (width < 1000 || height < 600) {
       this.inputError(this.image, "Image trop petite");
-    }
+    } else this.inputValid(this.image);
   }
 
-  sendForm() {
+  async sendForm(form) {
+    console.log(form);
     if (this.author.isValid && this.description.isValid && this.image.isValid) {
-      addItem({
-        author: this.author.input.value,
-        description: this.description.input.value,
-        imageUrl: this.image.input.value,
-      });
+      const data = new FormData(form);
+      await addItem(data);
       this.close();
       location.href = "/library";
     } else {
-      console.log("erreur lors de l'envoie du formulaire");
+      alert("Echec de l'envoi du formulaire, veuillez vérifier les éléments");
     }
   }
 

@@ -11,7 +11,7 @@ export function deleteItem(element) {
   fetch(`/api/screenshots/${element.id}`, myInit)
     .then(function (response) {
       if (response.ok) {
-        element.delete();
+        console.log("Element supprimer");
       }
     })
     .catch(function (error) {

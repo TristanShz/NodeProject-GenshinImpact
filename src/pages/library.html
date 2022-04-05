@@ -32,29 +32,19 @@
       /></i>
       <h2></h2>
       <form>
-        <div id="author">
-          <label for="author" class="formLabel">Name or Pseudo :</label>
-          <input type="text" name="author" />
-          <span></span>
-        </div>
-        <div id="description">
-          <label for="description" class="formLabel">Description :</label>
-          <textarea name="description" rows="3"></textarea>
-          <span></span>
-        </div>
-        <div id="imageUrl">
-          <label for="imageUrl" class="formLabel">Image URL : </label>
-          <span style="color: white; font-size: 14px; margin-bottom: 5px"
-            >Lien commençant par http ou https, finissant par une extension
-            d'image valide (exemple : http://mon-image.png)</span
-          >
-          <span style="color: white; font-size: 14px; margin-bottom: 5px"
-            >Taille minimale : 1000 x 600</span
-          >
-          <input type="file" accept="image/*" name="imageUrl" />
-          <img src="" alt="" id="imageOutput" />
-          <span></span>
-        </div>
+        <label for="author" class="formLabel">Name or Pseudo :</label>
+        <input type="text" name="author" />
+        <span></span>
+        <label for="description" class="formLabel">Description :</label>
+        <textarea name="description" rows="3"></textarea>
+        <span></span>
+        <label for="image" class="formLabel">Image :</label>
+        <span style="color: white; font-size: 14px; margin-bottom: 5px"
+          >Taille minimale : 1000 x 600</span
+        >
+        <input type="file" accept="image/*" name="image" />
+        <img src="" alt="" id="imageOutput" />
+        <span></span>
         <button></button>
       </form>
     </div>

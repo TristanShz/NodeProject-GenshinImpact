@@ -19,6 +19,8 @@
   "homepage": "https://github.com/TristanSch1/NodeProject-GenshinImpact#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "mongoose": "^6.2.8"
+    "file-system": "^2.2.2",
+    "mongoose": "^6.2.8",
+    "multer": "^1.4.4"
   }
 }

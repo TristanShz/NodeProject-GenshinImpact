@@ -19,7 +19,7 @@ export async function readItems() {
           element._id,
           element.author,
           element.description,
-          element.imageUrl
+          element.image
         )
       );
     });

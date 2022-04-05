@@ -33,21 +33,19 @@ form.description.input.addEventListener("input", (content) => {
 });
 
 form.image.input.addEventListener("change", (event) => {
-  console.log(event.target.files[0]);
   form.image.img.src = URL.createObjectURL(event.target.files[0]);
   form.image.img.addEventListener("load", () => {
     form.imageValidation(
       form.image.img.naturalWidth,
       form.image.img.naturalHeight
     );
+    console.log(form.image.img.src);
   });
 });
 
 form.formElement.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const formData = new FormData(this);
-  console.log(formData);
-  console.log(this);
+  form.sendForm(document.querySelector("#addScreenshotForm form"));
 });
 //Envoi du formulaire
 form.sendButton.addEventListener("click", (event) => {});
@@ -62,7 +60,7 @@ screenshotsList.forEach((element) => {
   //Ecoute du clic sur chaque image
   element.image.addEventListener("click", () => {
     //Création et insertion de la modal dans le dom
-    myModal = new Modal(element.author, element.description, element.url);
+    myModal = new Modal(element.author, element.description, element.image);
     myModal.open();
 
     //Edition d'un element

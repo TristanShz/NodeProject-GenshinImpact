@@ -1,11 +1,9 @@
-export function addItem(element) {
-  const myInit = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(element),
-  };
+export async function addItem(form) {
   
-  fetch("/api/screenshots", myInit)
+  await fetch("/api/screenshots", {
+    method: "POST",
+    body: form,
+  })
     .then(function (response) {
       if (response.ok) {
         console.log("element ajouté");
