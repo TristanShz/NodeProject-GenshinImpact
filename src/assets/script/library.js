@@ -45,7 +45,7 @@ form.image.input.addEventListener("change", (event) => {
 
 form.formElement.addEventListener("submit", async (event) => {
   event.preventDefault();
-  form.sendForm(document.querySelector("#addScreenshotForm form"));
+  form.sendForm();
 });
 //Envoi du formulaire
 form.sendButton.addEventListener("click", (event) => {});

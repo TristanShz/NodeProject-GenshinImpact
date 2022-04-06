@@ -2,7 +2,8 @@ const modalContainer = document.querySelector("#modalImage");
 const blurryContent = document.querySelector("#blurryContent");
 export class Modal {
   constructor(author, description, image) {
-    this.image = image;
+    this.image = document.createElement("img");
+    this.image.src = image.src;
 
     this.modalDescription = document.createElement("div");
     this.modalDescription.setAttribute("id", "modalDescription");

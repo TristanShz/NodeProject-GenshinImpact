@@ -99,11 +99,9 @@ export class ScreenshotForm {
     } else this.inputValid(this.image);
   }
 
-  async sendForm(form) {
-    console.log(form);
+  async sendForm() {
     if (this.author.isValid && this.description.isValid && this.image.isValid) {
-      const data = new FormData(form);
-      await addItem(data);
+      await addItem(this.formElement);
       this.close();
       location.href = "/library";
     } else {
@@ -116,7 +114,7 @@ export class ScreenshotForm {
       updateItem({
         author: this.author.input.value,
         description: this.description.input.value,
-        imageUrl: this.image.input.value,
+        image: this.image.input.value,
         id: this.id,
       });
       this.close();

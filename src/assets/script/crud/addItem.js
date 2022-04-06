@@ -1,8 +1,7 @@
 export async function addItem(form) {
-  
   await fetch("/api/screenshots", {
     method: "POST",
-    body: form,
+    body: new FormData(form),
   })
     .then(function (response) {
       if (response.ok) {
