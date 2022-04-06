@@ -43,12 +43,12 @@ form.image.input.addEventListener("change", (event) => {
   });
 });
 
+//Envoi du formulaire
 form.formElement.addEventListener("submit", async (event) => {
   event.preventDefault();
-  form.sendForm();
+  if (!form.isEditing) form.sendForm();
+  else form.updateForm();
 });
-//Envoi du formulaire
-form.sendButton.addEventListener("click", (event) => {});
 /*-------------------------------------------------------*/
 let myModal;
 

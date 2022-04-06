@@ -1,10 +1,10 @@
-export function updateItem(screenshot) {
+export function updateItem(form, id) {
   const myInit = {
     method: "PUT",
-    body: JSON.stringify(screenshot),
+    body: new FormData(form),
   };
 
-  fetch(`/api/screenshots/${screenshot.id}`, myInit)
+  fetch(`/api/screenshots/${id}`, myInit)
     .then(function (response) {
       if (response.ok) {
         console.log("screenshot modifié");

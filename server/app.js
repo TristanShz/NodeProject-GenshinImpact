@@ -89,12 +89,19 @@ app.get("/api/screenshots", (req, res, next) => {
 
 //UPDATE
 app.put("/api/screenshots/:id", (req, res, next) => {
-  Screenshots.updateOne(
-    { _id: req.params.id },
-    { ...req.body, _id: req.params.id }
-  )
-    .then(() => res.status(200).json({ message: "Objet modifié !" }))
-    .catch((error) => res.status(400).json({ error }));
+  console.log(req);
+  console.log();
+  // Screenshots.updateOne(
+  //   { _id: req.params.id },
+  //   {
+  //     author: req.body.author,
+  //     description: req.body.description,
+  //     image: req.body.image,
+  //     _id: req.params.id,
+  //   }
+  // )
+  //   .then(() => res.status(200).json({ message: "Objet modifié !" }))
+  //   .catch((error) => res.status(400).json({ error }));
 });
 
 //DELETE

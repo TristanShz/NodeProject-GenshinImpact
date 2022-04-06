@@ -111,14 +111,9 @@ export class ScreenshotForm {
 
   updateForm() {
     if (this.author.isValid && this.description.isValid && this.image.isValid) {
-      updateItem({
-        author: this.author.input.value,
-        description: this.description.input.value,
-        image: this.image.input.value,
-        id: this.id,
-      });
-      this.close();
-      location.href = "/library";
+      updateItem(this.formElement, this.id);
+      // this.close();
+      // location.href = "/library";
     } else {
       console.log("erreur lors de l'envoie du formulaire");
     }

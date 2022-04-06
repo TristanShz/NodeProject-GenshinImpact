@@ -1,4 +1,6 @@
 export async function addItem(form) {
+  let test = new FormData(form);
+  console.log(test);
   await fetch("/api/screenshots", {
     method: "POST",
     body: new FormData(form),
