@@ -6,6 +6,6 @@ export class Screenshot {
     this.author = author;
     this.description = desc;
     this.image = document.createElement("img");
-    this.image.setAttribute("src", "./uploads/" + image);
+    this.image.setAttribute("src", "../uploads/" + image);
   }
 }

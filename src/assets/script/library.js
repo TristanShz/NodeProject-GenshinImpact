@@ -75,8 +75,8 @@ screenshotsList.forEach((element) => {
       let isConfirm = confirm("Are you sure to delete this screenshot ?");
       if (isConfirm) {
         deleteItem(element);
-        location.href = "/library";
-        myModal.close();
+        // location.href = "/library";
+        // myModal.close();
       }
     });
     //Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
