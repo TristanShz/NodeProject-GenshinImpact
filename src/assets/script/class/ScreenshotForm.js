@@ -110,6 +110,7 @@ export class ScreenshotForm {
   }
 
   updateForm() {
+    console.log(this.formElement);
     if (this.author.isValid && this.description.isValid && this.image.isValid) {
       updateItem(this.formElement, this.id);
       // this.close();

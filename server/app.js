@@ -88,20 +88,35 @@ app.get("/api/screenshots", (req, res, next) => {
 });
 
 //UPDATE
-app.put("/api/screenshots/:id", (req, res, next) => {
-  console.log(req);
-  console.log();
-  // Screenshots.updateOne(
-  //   { _id: req.params.id },
-  //   {
-  //     author: req.body.author,
-  //     description: req.body.description,
-  //     image: req.body.image,
-  //     _id: req.params.id,
-  //   }
-  // )
-  //   .then(() => res.status(200).json({ message: "Objet modifié !" }))
-  //   .catch((error) => res.status(400).json({ error }));
+app.put("/api/screenshots/:id", upload.single("image"), (req, res, next) => {
+  if (req.file) {
+    Screenshots.findOne({ _id: req.params.id }, (err, screenshot) => {
+      fs.unlinkSync(
+        path.join(__dirname, distDir, "/uploads/", screenshot.image)
+      );
+    });
+
+    Screenshots.updateOne(
+      { _id: req.params.id },
+      {
+        author: req.body.author,
+        description: req.body.description,
+        image: req.file.filename,
+      }
+    )
+      .then(() => res.status(200).json({ message: "Objet modifié !" }))
+      .catch((error) => res.status(400).json({ error }));
+  } else {
+    Screenshots.updateOne(
+      { _id: req.params.id },
+      {
+        author: req.body.author,
+        description: req.body.description,
+      }
+    )
+      .then(() => res.status(200).json({ message: "Objet modifié !" }))
+      .catch((error) => res.status(400).json({ error }));
+  }
 });
 
 //DELETE
