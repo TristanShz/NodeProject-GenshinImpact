@@ -18,12 +18,12 @@ import { ScreenshotForm } from "./class/ScreenshotForm.js";
 /*------------------FORM POPUP CONTENT-------------------*/
 let form = new ScreenshotForm();
 
-//Open form popup
+//Ouverture du formulaire
 addScreenshotButton.addEventListener("click", () => form.open());
-//Close form popup
+//Fermeture du formulaire
 form.closeButton.addEventListener("click", () => form.close());
 
-//Check des input
+//Check des inputs
 form.author.input.addEventListener("input", (content) => {
   form.authorValidation(content.target.value);
 });
@@ -52,14 +52,16 @@ form.formElement.addEventListener("submit", async (event) => {
 /*-------------------------------------------------------*/
 let myModal;
 
+//Appel de la fonction readItems qui retourne la liste de tout
+//les éléments en base de données
 let screenshotsList = await readItems();
 
 screenshotsList.forEach((element) => {
-  //Ajout de toutes les images dans la div #imgContainer
+  //Ajout de toutes les images dans le DOM
   imgContainer.appendChild(element.image);
   //Ecoute du clic sur chaque image
   element.image.addEventListener("click", () => {
-    //Création et insertion de la modal dans le dom
+    //Création et insertion de la modal dans le DOM
     myModal = new Modal(element.author, element.description, element.image);
     myModal.open();
 
@@ -73,6 +75,7 @@ screenshotsList.forEach((element) => {
       let isConfirm = confirm("Are you sure to delete this screenshot ?");
       if (isConfirm) {
         deleteItem(element);
+        location.href = "/library";
         myModal.close();
       }
     });

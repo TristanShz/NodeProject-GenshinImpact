@@ -42,6 +42,9 @@
   margin-bottom: 20px;
 }
 
+#addScreenshotForm form label {
+  margin-bottom: 15px;
+}
 #addScreenshotForm form span {
   color: tomato;
   font-size: 22px;
@@ -49,10 +52,12 @@
 #addScreenshotForm form textarea {
   resize: none;
   font-size: 30px;
+  margin-bottom: 15px;
 }
 #addScreenshotForm form input {
   height: 50px;
   font-size: 30px;
+  margin-bottom: 15px;
 }
 
 .formLabel {
@@ -62,7 +67,7 @@
 #addScreenshotForm form img {
   width: 60%;
   border: 3px solid white;
-  margin-top: 20px;
+  margin: 20px 0;
   align-self: center;
 }
 #addScreenshotForm button {

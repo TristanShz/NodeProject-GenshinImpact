@@ -10,6 +10,7 @@ const screenshotsSchema = mongoose.Schema({
   author: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
+  createdAt: { type: Number, default: Date.now() },
 });
 
 /*

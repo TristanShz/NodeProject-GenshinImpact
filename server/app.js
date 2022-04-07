@@ -58,7 +58,7 @@ app.post("/api/screenshots", upload.single("image"), (req, res, next) => {
     description: req.body.description,
     image: req.file.filename,
   });
-  console.log(screenshot);
+  //Sauvegarde du screenshot dans la base de données
   screenshot
     .save()
     .then((result) => {
