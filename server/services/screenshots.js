@@ -18,9 +18,9 @@ exports.add = (screenshotContent) => {
 //Service de la route DELETE /api/screenshots
 exports.delete = (screenshotId) => {
   Screenshot.findOne({ _id: screenshotId }, (err, screenshot) => {
-    fs.unlinkSync(path.join(__dirname, ".../src/uploads/", screenshot.image));
+    fs.unlinkSync(path.join(__dirname, "../../src/uploads/", screenshot.image));
   });
-  Screenshot.deleteOne({ _id: req.params.id }).then((result) => {
+  Screenshot.deleteOne({ _id: screenshotId }).then((result) => {
     return result;
   });
 };

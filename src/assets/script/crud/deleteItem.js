@@ -1,9 +1,6 @@
 export function deleteItem(element) {
-  const myHeaders = new Headers();
-
   const myInit = {
     method: "DELETE",
-    headers: myHeaders,
     mode: "cors",
     cache: "default",
   };

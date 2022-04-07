@@ -31,7 +31,7 @@ exports.addScreenshot = (req, res) => {
 exports.deleteScreenshot = (req, res) => {
   try {
     const deletedScreenshot = screenshotServices.delete(req.params.id);
-    if (deletedScreenshot.ok)
+    if (deletedScreenshot)
       res.status(200).json({ message: "Deleted screenshot successfully !" });
   } catch (error) {
     res.send(400).send(error);
