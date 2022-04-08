@@ -75,7 +75,7 @@ screenshotsList.forEach((element) => {
       let isConfirm = confirm("Are you sure to delete this screenshot ?");
       if (isConfirm) {
         deleteItem(element);
-        location.href = "/library";
+        // location.href = "/library";
         myModal.close();
       }
     });

@@ -17,8 +17,13 @@ exports.add = async (screenshotContent) => {
 
 //Service de la route DELETE /api/screenshots
 exports.delete = async (screenshotId) => {
+  const uploadsFile = fs.readdirSync(path.join(__dirname, "../../src/uploads"));
   Screenshot.findOne({ _id: screenshotId }, (err, screenshot) => {
-    fs.unlinkSync(path.join(__dirname, "../../src/uploads/", screenshot.image));
+    if (uploadsFile.includes(screenshot.image)) {
+      fs.unlinkSync(
+        path.join(__dirname, "../../src/uploads/", screenshot.image)
+      );
+    }
   });
   const screenshotDeleted = await Screenshot.deleteOne({ _id: screenshotId });
 
