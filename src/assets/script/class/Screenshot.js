@@ -1,7 +1,8 @@
 const imgContainer = document.querySelector("#imgContainer");
 
 export class Screenshot {
-  constructor(id, author, desc, image) {
+  constructor(index, id, author, desc, image) {
+    this.index = index;
     this.id = id;
     this.author = author;
     this.description = desc;

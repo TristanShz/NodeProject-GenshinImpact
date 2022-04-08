@@ -5,9 +5,10 @@ export async function readItems() {
   let response = await fetch("/api/screenshots", { method: "GET" });
   if (response.ok) {
     let screenshots = await response.json();
-    await screenshots.forEach((element) => {
+    await screenshots.forEach((element, index) => {
       newItems.push(
         new Screenshot(
+          index,
           element._id,
           element.author,
           element.description,

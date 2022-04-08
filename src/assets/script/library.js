@@ -55,7 +55,7 @@ let myModal;
 //Appel de la fonction readItems qui retourne la liste de tout
 //les éléments en base de données
 let screenshotsList = await readItems();
-
+console.log(screenshotsList);
 screenshotsList.forEach((element) => {
   //Ajout de toutes les images dans le DOM
   imgContainer.appendChild(element.image);
@@ -79,9 +79,14 @@ screenshotsList.forEach((element) => {
         myModal.close();
       }
     });
-    //Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
+    //Au clique sur la croix ou hors de l'image on supprime tout les éléments enfants de la div modalContainer
     document.getElementById("closeModal").addEventListener("click", () => {
       myModal.close();
     });
+    document
+      .querySelector("#blurryContent")
+      .addEventListener("click", (event) => {
+        myModal.close();
+      });
   });
 });
