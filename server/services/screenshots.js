@@ -8,36 +8,40 @@ exports.list = () => {
 };
 
 //Service de la route POST /api/screenshots
-exports.add = (screenshotContent) => {
+exports.add = async (screenshotContent) => {
   const screenshot = new Screenshot(screenshotContent);
-  screenshot.save().then((result) => {
-    return result;
-  });
+  const screenshotAdded = await screenshot.save();
+  console.log(screenshot === screenshotAdded);
+  return screenshot == screenshotAdded;
 };
 
 //Service de la route DELETE /api/screenshots
-exports.delete = (screenshotId) => {
+exports.delete = async (screenshotId) => {
   Screenshot.findOne({ _id: screenshotId }, (err, screenshot) => {
     fs.unlinkSync(path.join(__dirname, "../../src/uploads/", screenshot.image));
   });
-  Screenshot.deleteOne({ _id: screenshotId }).then((result) => {
-    return result;
-  });
+  const screenshotDeleted = await Screenshot.deleteOne({ _id: screenshotId });
+
+  return screenshotDeleted;
 };
 
 //Service de la route PUT /api/screenshots
-exports.updateWithFile = (screenshotId, screenshot) => {
+exports.updateWithFile = async (screenshotId, screenshot) => {
   Screenshot.findOne({ _id: screenshotId }, (err, screenshot) => {
     fs.unlinkSync(path.join(__dirname, "../src/uploads/", screenshot.image));
   });
 
-  Screenshot.updateOne({ _id: screenshotId }, screenshot).then((result) => {
-    return result;
-  });
+  const screenshotUpdated = await Screenshot.updateOne(
+    { _id: screenshotId },
+    screenshot
+  );
+  return screenshotUpdated;
 };
 
-exports.update = (screenshotId, screenshot) => {
-  Screenshot.updateOne({ _id: screenshotId }, screenshot).then((result) => {
-    return result;
-  });
+exports.update = async (screenshotId, screenshot) => {
+  const screenshotUpdated = await Screenshot.updateOne(
+    { _id: screenshotId },
+    screenshot
+  );
+  return screenshotUpdated;
 };

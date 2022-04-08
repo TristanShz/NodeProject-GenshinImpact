@@ -1,16 +1,8 @@
 import { Screenshot } from "../class/Screenshot.js";
 
 export async function readItems() {
-  const myHeaders = new Headers();
-
-  const myInit = {
-    method: "GET",
-    headers: myHeaders,
-    mode: "cors",
-    cache: "default",
-  };
   let newItems = [];
-  let response = await fetch("/api/screenshots", myInit);
+  let response = await fetch("/api/screenshots", { method: "GET" });
   if (response.ok) {
     let screenshots = await response.json();
     await screenshots.forEach((element) => {
