@@ -1,5 +1,3 @@
-const imgContainer = document.querySelector("#imgContainer");
-
 export class Screenshot {
   constructor(index, id, author, desc, image) {
     this.index = index;
@@ -7,6 +5,6 @@ export class Screenshot {
     this.author = author;
     this.description = desc;
     this.image = document.createElement("img");
-    this.image.setAttribute("src", "../uploads/" + image);
+    this.image.setAttribute("src", "../assets/uploads/" + image);
   }
 }

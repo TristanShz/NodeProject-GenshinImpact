@@ -1,0 +1,17 @@
+#pagination {
+}
+
+#pagination a {
+  margin: 0 6px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#pagination a:hover {
+  cursor: pointer;
+}
+
+#pagination a.selected {
+  color: green;
+  text-decoration: underline;
+}

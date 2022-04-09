@@ -13,7 +13,6 @@ const distDir = "../src";
 
 app.use("/pages", express.static(path.join(__dirname, distDir, "/pages")));
 app.use("/assets", express.static(path.join(__dirname, distDir, "/assets")));
-app.use("/uploads", express.static(path.join(__dirname, distDir, "/uploads")));
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));

@@ -93,4 +93,16 @@ export class Modal {
     }
     blurryContent.style.display = "none";
   }
+
+  previousImage() {
+    if (this.currentIndex !== 0) {
+      this.setCurrentImage(this.currentIndex - 1);
+    } else this.setCurrentImage(this.screenshotsList.length - 1);
+  }
+
+  nextImage() {
+    if (this.currentIndex !== this.screenshotsList.length - 1) {
+      this.setCurrentImage(this.currentIndex + 1);
+    } else this.setCurrentImage(0);
+  }
 }

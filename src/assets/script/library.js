@@ -1,19 +1,12 @@
 /*-------------DOM ELEMENTS-------------------------------*/
-const libraryContent = document.querySelector("#libraryContent");
 const addScreenshotButton = document.querySelector("#libraryContent button");
-const addScreenshotForm = document.querySelector("#addScreenshotForm");
-const closePopup = document.querySelector("#closePopup");
-
-const description = document.querySelector("#description");
-const imageUrl = document.querySelector("#imageUrl");
 const imgContainer = document.querySelector("#imgContainer");
-const modalContainer = document.querySelector("#modalImage");
-
 /*-------------------------------------------------------*/
 import { Modal } from "./class/Modal.js";
 import { deleteItem } from "./crud/deleteItem.js";
 import { readItems } from "./crud/readItems.js";
 import { ScreenshotForm } from "./class/ScreenshotForm.js";
+import { Pagination } from "./class/Pagination.js";
 
 /*------------------FORM POPUP CONTENT-------------------*/
 let form = new ScreenshotForm();
@@ -39,7 +32,6 @@ form.image.input.addEventListener("change", (event) => {
       form.image.img.naturalWidth,
       form.image.img.naturalHeight
     );
-    console.log(form.image.img.src);
   });
 });
 
@@ -50,50 +42,63 @@ form.formElement.addEventListener("submit", async (event) => {
   else form.updateForm();
 });
 /*-------------------------------------------------------*/
+const screenshotsList = await readItems();
 
-//Appel de la fonction readItems qui retourne la liste de tout
-//les éléments en base de données
-let screenshotsList = await readItems();
+const pagination = new Pagination(screenshotsList);
+const myModal = new Modal(screenshotsList);
 
-let myModal = new Modal(screenshotsList);
-
-screenshotsList.forEach((element) => {
-  //Ajout de toutes les images dans le DOM
-  imgContainer.appendChild(element.image);
-  //Ecoute du clic sur chaque image
-  element.image.addEventListener("click", () => {
-    //Création et insertion de la modal dans le DOM
-    myModal.setCurrentImage(element.index);
-    myModal.open();
-  });
-});
-//Edition d'un element
-myModal.editIcon.addEventListener("click", () => {
-  myModal.close();
-  form.open(element);
-});
-//Suppression d'un element
-myModal.deleteIcon.addEventListener("click", () => {
-  let isConfirm = confirm("Are you sure to delete this screenshot ?");
-  if (isConfirm) {
-    deleteItem(element);
-    location.href = "/library";
-    myModal.close();
+function setPage(page) {
+  if (imgContainer.childElementCount > 0) {
+    while (imgContainer.firstChild) {
+      imgContainer.removeChild(imgContainer.lastChild);
+    }
   }
-});
-//Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
-myModal.closeModal.addEventListener("click", () => {
-  myModal.close();
-});
+  pagination.setCurrentPage(page).forEach((element) => {
+    //Ajout de toutes les images dans le DOM
+    imgContainer.appendChild(element.image);
+    //Ecoute du clic sur chaque image
+    element.image.addEventListener("click", () => {
+      //Création et insertion de la modal dans le DOM
+      myModal.setCurrentImage(element.index);
+      myModal.open();
 
-//Changement d'image au clique sur les flèches
-myModal.arrowLeft.addEventListener("click", () => {
-  if (myModal.currentIndex !== 0) {
-    myModal.setCurrentImage(myModal.currentIndex - 1);
-  } else myModal.setCurrentImage(screenshotsList.length - 1);
-});
-myModal.arrowRight.addEventListener("click", () => {
-  if (myModal.currentIndex !== screenshotsList.length - 1) {
-    myModal.setCurrentImage(myModal.currentIndex + 1);
-  } else myModal.setCurrentImage(0);
+      //Edition d'un element
+      myModal.editIcon.addEventListener("click", () => {
+        myModal.close();
+        form.open(element);
+      });
+
+      //Suppression d'un element
+      myModal.deleteIcon.addEventListener("click", () => {
+        let isConfirm = confirm("Are you sure to delete this screenshot ?");
+        if (isConfirm) {
+          deleteItem(element);
+          location.href = "/library";
+          myModal.close();
+        }
+      });
+    });
+  });
+
+  //Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
+  myModal.closeModal.addEventListener("click", () => {
+    myModal.close();
+  });
+
+  //Changement d'image au clique sur les flèches
+  myModal.arrowLeft.addEventListener("click", () => {
+    myModal.previousImage();
+  });
+  myModal.arrowRight.addEventListener("click", () => {
+    myModal.nextImage();
+  });
+}
+
+setPage(1);
+
+pagination.paginationElement.forEach((element) => {
+  pagination.paginationDiv.append(element);
+  element.addEventListener("click", () => {
+    setPage(element.innerText);
+  });
 });

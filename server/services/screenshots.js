@@ -17,11 +17,11 @@ exports.add = async (screenshotContent) => {
 
 //Service de la route DELETE /api/screenshots
 exports.delete = async (screenshotId) => {
-  const uploadsFile = fs.readdirSync(path.join(__dirname, "../../src/uploads"));
+  const uploadsFile = fs.readdirSync(path.join(__dirname, "../../src/assets/uploads"));
   Screenshot.findOne({ _id: screenshotId }, (err, screenshot) => {
     if (uploadsFile.includes(screenshot.image)) {
       fs.unlinkSync(
-        path.join(__dirname, "../../src/uploads/", screenshot.image)
+        path.join(__dirname, "../../src/assets/uploads/", screenshot.image)
       );
     }
   });
@@ -33,7 +33,7 @@ exports.delete = async (screenshotId) => {
 //Service de la route PUT /api/screenshots
 exports.updateWithFile = async (screenshotId, screenshot) => {
   Screenshot.findOne({ _id: screenshotId }, (err, screenshot) => {
-    fs.unlinkSync(path.join(__dirname, "../src/uploads/", screenshot.image));
+    fs.unlinkSync(path.join(__dirname, "../src/assets/uploads/", screenshot.image));
   });
 
   const screenshotUpdated = await Screenshot.updateOne(
