@@ -50,43 +50,50 @@ form.formElement.addEventListener("submit", async (event) => {
   else form.updateForm();
 });
 /*-------------------------------------------------------*/
-let myModal;
 
 //Appel de la fonction readItems qui retourne la liste de tout
 //les éléments en base de données
 let screenshotsList = await readItems();
-console.log(screenshotsList);
+
+let myModal = new Modal(screenshotsList);
+
 screenshotsList.forEach((element) => {
   //Ajout de toutes les images dans le DOM
   imgContainer.appendChild(element.image);
   //Ecoute du clic sur chaque image
   element.image.addEventListener("click", () => {
     //Création et insertion de la modal dans le DOM
-    myModal = new Modal(element.author, element.description, element.image);
+    myModal.setCurrentImage(element.index);
     myModal.open();
-
-    //Edition d'un element
-    myModal.editIcon.addEventListener("click", () => {
-      myModal.close();
-      form.open(element);
-    });
-    //Suppression d'un element
-    myModal.deleteIcon.addEventListener("click", () => {
-      let isConfirm = confirm("Are you sure to delete this screenshot ?");
-      if (isConfirm) {
-        deleteItem(element);
-        // location.href = "/library";
-        myModal.close();
-      }
-    });
-    //Au clique sur la croix ou hors de l'image on supprime tout les éléments enfants de la div modalContainer
-    document.getElementById("closeModal").addEventListener("click", () => {
-      myModal.close();
-    });
-    document
-      .querySelector("#blurryContent")
-      .addEventListener("click", (event) => {
-        myModal.close();
-      });
   });
+});
+//Edition d'un element
+myModal.editIcon.addEventListener("click", () => {
+  myModal.close();
+  form.open(element);
+});
+//Suppression d'un element
+myModal.deleteIcon.addEventListener("click", () => {
+  let isConfirm = confirm("Are you sure to delete this screenshot ?");
+  if (isConfirm) {
+    deleteItem(element);
+    location.href = "/library";
+    myModal.close();
+  }
+});
+//Au clique sur la croix on supprime tout les éléments enfants de la div modalContainer
+myModal.closeModal.addEventListener("click", () => {
+  myModal.close();
+});
+
+//Changement d'image au clique sur les flèches
+myModal.arrowLeft.addEventListener("click", () => {
+  if (myModal.currentIndex !== 0) {
+    myModal.setCurrentImage(myModal.currentIndex - 1);
+  } else myModal.setCurrentImage(screenshotsList.length - 1);
+});
+myModal.arrowRight.addEventListener("click", () => {
+  if (myModal.currentIndex !== screenshotsList.length - 1) {
+    myModal.setCurrentImage(myModal.currentIndex + 1);
+  } else myModal.setCurrentImage(0);
 });

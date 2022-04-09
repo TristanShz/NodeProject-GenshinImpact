@@ -1,21 +1,23 @@
-const modalContainer = document.querySelector("#modalImage");
+const modalBlock = document.querySelector("#modalBlock");
 const blurryContent = document.querySelector("#blurryContent");
 export class Modal {
-  constructor(author, description, image) {
-    this.image = document.createElement("img");
-    this.image.src = image.src;
+  constructor(screenshotsList) {
+    this.screenshotsList = screenshotsList;
+
+    this.modalContainer = document.createElement("div");
+    this.modalContainer.setAttribute("id", "modalImage");
 
     this.modalDescription = document.createElement("div");
     this.modalDescription.setAttribute("id", "modalDescription");
 
-    this.author = document.createElement("h2");
-    this.author.innerText = `Author : ${author}`;
+    this.modalImage = document.createElement("img");
+
+    this.modalAuthor = document.createElement("h2");
 
     this.descriptionTitle = document.createElement("h2");
     this.descriptionTitle.innerText = "Description : ";
 
-    this.description = document.createElement("p");
-    this.description.innerText = description;
+    this.descriptionText = document.createElement("p");
 
     //Icone Edit
     this.editIcon = document.createElement("i");
@@ -39,30 +41,55 @@ export class Modal {
     //Création du bloc modalDescription
     this.modalDescription.append(
       this.descriptionTitle,
-      this.author,
-      this.description,
+      this.modalAuthor,
+      this.descriptionText,
       this.iconDescription
     );
     //Croix permettant de fermer la modal
     this.closeModal = document.createElement("i");
-    this.closeModalPng = document.createElement("img");
     this.closeModal.setAttribute("id", "closeModal");
+    this.closeModalPng = document.createElement("img");
     this.closeModalPng.src = "../assets/images/close.png";
     this.closeModal.appendChild(this.closeModalPng);
+
+    //Flèches permettants de naviguer entre les images
+    this.arrowLeft = document.createElement("i");
+    this.arrowLeft.setAttribute("class", "arrow");
+    this.arrowLeft.innerHTML = "<img src='../assets/images/arrowLeft.png' />";
+
+    this.arrowRight = document.createElement("i");
+    this.arrowRight.setAttribute("class", "arrow");
+    this.arrowRight.innerHTML = "<img src='../assets/images/arrowRight.png' />";
+
+    this.modalContainer.append(
+      this.modalImage,
+      this.modalDescription,
+      this.closeModal
+    );
+  }
+
+  setCurrentImage(index) {
+    this.currentIndex = index;
+    this.author = this.screenshotsList[this.currentIndex].author;
+    this.description = this.screenshotsList[this.currentIndex].description;
+    this.modalImage.src = this.screenshotsList[this.currentIndex].image.src;
+
+    this.modalAuthor.innerText = `Author : ${this.author}`;
+    this.descriptionText.innerText = this.description;
   }
 
   open() {
-    modalContainer.style.display = "block";
-    modalContainer.append(this.image, this.modalDescription, this.closeModal);
+    modalBlock.style.display = "flex";
+    modalBlock.append(this.arrowLeft, this.modalContainer, this.arrowRight);
     blurryContent.style.display = "block";
   }
 
   close() {
-    modalContainer.style.display = "none";
-    let child = modalContainer.lastElementChild;
+    modalBlock.style.display = "none";
+    let child = modalBlock.lastElementChild;
     while (child) {
-      modalContainer.removeChild(child);
-      child = modalContainer.lastElementChild;
+      modalBlock.removeChild(child);
+      child = modalBlock.lastElementChild;
     }
     blurryContent.style.display = "none";
   }
