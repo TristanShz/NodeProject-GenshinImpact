@@ -127,3 +127,31 @@
   justify-content: space-between;
   width: 80px;
 }
+
+#modalDescription span {
+  opacity: 0.5;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  animation-name: arrowDownAnimation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes arrowDownAnimation {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: 5px;
+  }
+  50% {
+    top: 0;
+  }
+  75% {
+    top: -5px;
+  }
+  100% {
+    top: 0px;
+  }
+}

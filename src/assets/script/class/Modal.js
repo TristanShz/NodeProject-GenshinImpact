@@ -38,8 +38,15 @@ export class Modal {
     this.iconDescription.setAttribute("id", "iconDescription");
     this.iconDescription.append(this.editIcon, this.deleteIcon);
 
+    //Icone de la flèche
+    this.arrowDown = document.createElement("span");
+    this.arrowDownImg = document.createElement("img");
+    this.arrowDownImg.src = "../assets/images/arrowDown.png";
+    this.arrowDown.append(this.arrowDownImg);
+
     //Création du bloc modalDescription
     this.modalDescription.append(
+      this.arrowDown,
       this.descriptionTitle,
       this.modalAuthor,
       this.descriptionText,
