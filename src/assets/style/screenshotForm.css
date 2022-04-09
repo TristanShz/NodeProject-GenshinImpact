@@ -14,8 +14,23 @@
     rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
     rgba(0, 0, 0, 0.09) 0px 32px 16px;
   z-index: 999;
+  animation-name: screenshotFormAnimation;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
 }
 
+@keyframes screenshotFormAnimation {
+  from {
+    top: 100%;
+    scale: 0 0;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    scale: 1 1;
+    opacity: 1;
+  }
+}
 #addScreenshotForm i {
   position: absolute;
   right: 0px;

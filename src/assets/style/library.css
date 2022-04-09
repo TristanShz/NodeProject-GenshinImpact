@@ -67,7 +67,6 @@ body {
   transform: scale(1.1, 1.1);
 }
 
-
 @keyframes blurryAnimate {
   from {
     opacity: 0;
