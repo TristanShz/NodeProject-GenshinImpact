@@ -1,3 +1,3 @@
 # NodeProject-GenshinImpact
 
-Projet d'évaluation pour Daniel Girard
+Projet d'évaluation
